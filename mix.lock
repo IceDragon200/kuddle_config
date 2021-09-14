@@ -1,0 +1,4 @@
+%{
+  "decimal": {:hex, :decimal, "2.0.0", "a78296e617b0f5dd4c6caf57c714431347912ffb1d0842e998e9792b5642d697", [:mix], [], "hexpm", "34666e9c55dea81013e77d9d87370fe6cb6291d1ef32f46a1600230b1d44f577"},
+  "kuddle": {:hex, :kuddle, "0.2.1", "f17223e68c205cde7e1df86fd50135a7c5a68a510edc4ef6bc0fa53139b79510", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: false]}], "hexpm", "c6bd37a07fe3f3f8970213fc74ec2f65ec539eff2f43624983a02fa81f397a8e"},
+}
