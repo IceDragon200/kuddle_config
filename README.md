@@ -137,8 +137,6 @@ application {
 }
 ```
 
-## Gotchas
-
 There is one tiny gotcha in regards to lists:
 
 ```kdl
@@ -240,3 +238,34 @@ A list of all available types and more information can be found in the Kuddle.Co
 | `boolean`        | `enable_polling (boolean)"YES"`                                               |
 | `tuple`          | `(tuple)call_pair "New York" "12003004000"`                                   |
 | `list`           | `(list)allow_list "117.27.222.122"`                                           |
+
+Additional types can be registered using `kuddle_config` `:types` config:
+
+```elixir
+config :kuddle_config,
+  types: [
+    geopoint: {MyGeoPoint, :cast},
+  ]
+```
+
+```elixir
+defmodule MyGeoPoint do
+  def cast(value) do
+    {:ok, String.split(value, ",", parts: 2) |> Enum.map(&Decimal.new/1) |> List.to_tuple()}
+  end
+end
+```
+
+```kdl
+application {
+  point (geopoint)"15.27,265.27"
+}
+```
+
+```elixir
+[
+  application: [
+    point: {%Decimal{coef: "1527", exp: -2, sign: 1}, %Decimal{coef: "26527", exp: -2, sign: 1}}
+  ]
+]
+```
