@@ -2,6 +2,24 @@ defmodule Kuddle.Config.DirectoryProvider do
   @moduledoc """
   Use Kuddle as a config provider for a directory, if you want to load a single file see
   Kuddle.Config.Provider instead
+
+  ## Example
+
+      defp releases do
+        [
+          application: [
+            config_providers: [
+              {Kuddle.Config.Provider, [
+                paths: [
+                  {:system, "PATH_TO_CONFIG", "/default/path/to/kdl/config"}
+                ],
+                extensions: [".kdl", ".kuddle"]
+              ]}
+            ]
+          ]
+        ]
+      end
+
   """
   import Kuddle.Config.Utils
 
@@ -50,10 +68,12 @@ defmodule Kuddle.Config.DirectoryProvider do
         ],
         extensions: [".cfg.kdl", ".cfg.kuddle"]
       ]
+
   """
   @type options :: [option()]
 
   @impl true
+  @spec init(options()) :: any()
   def init(opts) do
     config =
       Enum.reduce(opts, %{paths: [], extensions: [".kdl"]}, fn

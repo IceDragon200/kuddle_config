@@ -1,27 +1,47 @@
-defmodule KuddleConfig.MixProject do
+defmodule Kuddle.Config.MixProject do
   use Mix.Project
 
   def project do
     [
+      name: "Kuddle Config",
       app: :kuddle_config,
+      description: description(),
       version: "0.1.0",
       elixir: "~> 1.9",
+      package: package(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      source_url: "https://github.com/IceDragon200/kuddle_config",
+      homepage_url: "https://github.com/IceDragon200/kuddle_config",
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:kuddle, "~> 0.2.1"}
+      {:kuddle, "~> 0.2.1"},
+      {:ex_doc, "~> 0.16", only: :dev},
+    ]
+  end
+
+  defp description do
+    """
+    Kuddle Config Provider or just general config helpers
+    """
+  end
+
+  defp package do
+    [
+      maintainers: ["Corey Powell"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/IceDragon200/kuddle_config"
+      },
     ]
   end
 end
