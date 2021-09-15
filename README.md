@@ -84,6 +84,69 @@ defp releases do
 end
 ```
 
+Despite the original purpose of this library being the config providers, the config module itself is quite useful even without the providers:
+
+```elixir
+# Have a KDL blob you wish to load?
+{:ok, config} =
+  Kuddle.Config.load_config_blob("""
+  application {
+    node "value"
+  }
+  """)
+
+[
+  application: [
+    node: "value"
+  ]
+] = config
+
+# Have a KDL file you'd like to load?
+{:ok, config} = Kuddle.Config.load_config_file("my_kdl_config.kdl")
+
+[
+  application: [
+    node2: "some_other_value"
+  ]
+] = config
+
+# Have a directory filled with KDL files you'd like to load into one config?
+{:ok, config} = Kuddle.Config.load_config_directory("/my/kdl/configs", [".kdl", ".kuddle"])
+
+[
+  data: [
+    {MyRepo, [
+      database: "database",
+      host: "127.0.0.1",
+      port: 5432,
+    ]},
+  ],
+  web: [
+    http: [
+      port: 4000
+    ]
+  ],
+  workers: [
+    amqp: [
+      host: "127.0.0.1",
+      port: 5732,
+      virtual_host: "my_workers",
+    ]
+  ]
+] = config
+
+# Have the kuddle document already?
+{:ok, config} = Kuddle.Config.load_config_document(document)
+
+[
+  logger: [
+    console: [
+      level: :debug
+    ]
+  ]
+] = config
+```
+
 ## Config Format
 
 Root nodes are application level config, while subsequent sub nodes will be one level deeper config
