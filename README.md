@@ -1,6 +1,6 @@
 # Kuddle Config
 
-An Elixir `Config.Provider` using kuddle, also general configuration helpers using Kuddle.
+An Elixir [`Config.Provider`](https://hexdocs.pm/elixir/master/Config.Provider.html) using [kuddle](https://github.com/IceDragon200/kuddle), also general configuration helpers using Kuddle.
 
 ## Installation
 
