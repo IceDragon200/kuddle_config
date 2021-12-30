@@ -97,7 +97,7 @@ defmodule Kuddle.Config.DirectoryProvider do
         path ->
           case File.stat(path) do
             {:ok, %{type: :regular}} ->
-              raise Kuddle.ConfigError, message: "path is directory", reason: {:error, :eisfile}
+              raise Kuddle.ConfigError, message: "path is regular file", reason: {:error, :eisfile}
 
             {:ok, %{type: :directory}} ->
               Kuddle.Config.load_config_directory(path, state.extensions, config)
