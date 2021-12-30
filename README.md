@@ -18,10 +18,15 @@ end
 
 Kuddle provides 2 different config providers:
 
-```elixir
-# The default Config.Provider which will load a kdl file as config
-Kuddle.Config.Provider
+### Single File Providers
 
+The default Config.Provider which will load a kdl file as config
+
+#### Kuddle.Config.Provider
+
+Used for elixir releases:
+
+```elixir
 # Format
 defp releases do
   [
@@ -49,9 +54,36 @@ defp releases do
 end
 ```
 
+#### Kuddle.Config.Distillery.Provider
+
+Used for distillery releases
+
+```elixir
+# Format
+release :my_app do
+  set config_providers: [
+    {Kuddle.Config.Distillery.Provider, [
+      path: config_path()
+    ]}
+  ]
+end
+
+# Example
+release :my_app do
+  set config_providers: [
+    {Kuddle.Config.Distillery.Provider, [
+      path: {:system, "PATH_TO_CONFIG", "/default/path/to/kdl/config"}
+    ]}
+  ]
+end
+```
+
+### Directory Loaders
+
+#### Kuddle.Config.DirectoryProvider
+
 ```elixir
 # A special config provider that will load every kdl file in a directory as config
-Kuddle.Config.DirectoryProvider
 
 # Format
 defp releases do
@@ -72,7 +104,7 @@ defp releases do
   [
     application: [
       config_providers: [
-        {Kuddle.Config.Provider, [
+        {Kuddle.Config.DirectoryProvider, [
           paths: [
             {:system, "PATH_TO_CONFIG", "/default/path/to/kdl/config"}
           ],
@@ -83,6 +115,34 @@ defp releases do
   ]
 end
 ```
+
+#### Kuddle.Config.Distillery.DirectoryProvider
+
+```elixir
+# Format
+release :my_app do
+  set config_providers: [
+    {Kuddle.Config.Distillery.DirectoryProvider, [
+      paths: [config_path()],
+      extensions: [String.t()]
+    ]}
+  ]
+end
+
+# Example
+release :my_app do
+  set config_providers: [
+    {Kuddle.Config.Distillery.DirectoryProvider, [
+      paths: [
+        {:system, "PATH_TO_CONFIG", "/default/path/to/kdl/config"}
+      ],
+      extensions: [".kdl", ".kuddle"]
+    ]}
+  ]
+end
+```
+
+## Other Use Cases
 
 Despite the original purpose of this library being the config providers, the config module itself is quite useful even without the providers:
 
@@ -195,7 +255,7 @@ Either can be mixed and matched to achieve a comfortable format:
 ```kdl
 application {
   food bacon="1" {
-    eggs="2"
+    eggs "2"
   }
 }
 ```
