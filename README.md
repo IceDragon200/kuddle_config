@@ -9,7 +9,7 @@ To add `kuddle_config` to your project:
 ```elixir
 def deps do
   [
-    {:kuddle_config, "~> 0.1.0"}
+    {:kuddle_config, "~> 0.2.0"}
   ]
 end
 ```
