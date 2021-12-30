@@ -42,6 +42,10 @@ defmodule Kuddle.Config.Utils do
     nil
   end
 
+  def resolve_root_path({:system, name}) do
+    System.fetch_env!(name)
+  end
+
   def resolve_root_path(path) do
     Config.Provider.resolve_config_path!(path)
   end
