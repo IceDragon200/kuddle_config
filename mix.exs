@@ -6,7 +6,7 @@ defmodule Kuddle.Config.MixProject do
       name: "Kuddle Config",
       app: :kuddle_config,
       description: description(),
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.9",
       package: package(),
       start_permanent: Mix.env() == :prod,
