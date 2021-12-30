@@ -90,7 +90,7 @@ defmodule Kuddle.Config.DirectoryProvider do
   @impl true
   def load(config, state) do
     Enum.reduce(state.paths, config, fn root_path, config ->
-      case resolve_root_path(root_path) do
+      case resolve_root_path!(root_path) do
         nil ->
           raise Kuddle.ConfigError, message: "unresolved path", reason: {:error, :unresolved_path}
 

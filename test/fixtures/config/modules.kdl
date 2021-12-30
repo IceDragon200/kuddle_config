@@ -1,0 +1,9 @@
+modules {
+	Module.A {
+		key 1
+	}
+
+	Module.B {
+		value 2
+	}
+}

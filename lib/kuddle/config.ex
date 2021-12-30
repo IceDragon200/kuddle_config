@@ -5,6 +5,8 @@ defmodule Kuddle.Config do
   alias Kuddle.Node
   alias Kuddle.Value
 
+  import Kuddle.Config.Utils, only: [mod_to_atom: 1]
+
   @doc """
   Load a config map from a given kdl blob.
 
@@ -107,10 +109,10 @@ defmodule Kuddle.Config do
     {:ok, Enum.reverse(acc)}
   end
 
-  defp config_from_attributes([{%Value{value: key}, %Value{} = value} = pair | rest], acc) do
+  defp config_from_attributes([{%Value{} = key, %Value{} = value} = pair | rest], acc) do
     case config_from_value(value) do
       {:ok, value} ->
-        config_from_attributes(rest, [{String.to_atom(key), value} | acc])
+        config_from_attributes(rest, [{kuddle_value_to_atom(key), value} | acc])
 
       :error ->
         {:error, {:attribute_error, pair}}
@@ -134,14 +136,14 @@ defmodule Kuddle.Config do
           [type] ->
             case Kuddle.Config.Types.cast(type, config) do
               {:ok, value} ->
-                {:ok, {String.to_atom(name), value}}
+                {:ok, {mod_to_atom(name), value}}
 
               {:error, _} = err ->
                 err
             end
 
           [] ->
-            {:ok, {String.to_atom(name), maybe_single(config)}}
+            {:ok, {mod_to_atom(name), maybe_single(config)}}
         end
 
       {:error, _} = err ->
@@ -153,7 +155,7 @@ defmodule Kuddle.Config do
     with {:ok, config} <- config_from_attributes(attributes),
          {:ok, config2} <- load_config_document(children) do
       config = Config.Reader.merge(config, config2)
-      {:ok, {String.to_atom(name), config}}
+      {:ok, {mod_to_atom(name), config}}
     end
   end
 
@@ -163,5 +165,9 @@ defmodule Kuddle.Config do
 
   defp maybe_single(a) do
     a
+  end
+
+  defp kuddle_value_to_atom(%Value{value: key}) do
+    mod_to_atom(key)
   end
 end

@@ -43,6 +43,14 @@ defmodule Kuddle.Config.DirectoryProviderTest do
           c: [
             value: "3"
           ]
+        ],
+        modules: [
+          {Module.A, [
+            key: 1
+          ]},
+          {Module.B, [
+            value: 2
+          ]},
         ]
       ] = Enum.sort(config)
     end

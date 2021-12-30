@@ -38,5 +38,24 @@ defmodule Kuddle.Config.ProviderTest do
         ]
       ] = config
     end
+
+    test "can handle module names in config" do
+      state = Kuddle.Config.Provider.init([
+        path: Path.expand("../../fixtures/config/modules.kdl", __DIR__)
+      ])
+
+      config = Kuddle.Config.Provider.load([], state)
+
+      assert [
+        modules: [
+          {Module.A, [
+            key: 1
+          ]},
+          {Module.B, [
+            value: 2
+          ]},
+        ]
+      ] = config
+    end
   end
 end

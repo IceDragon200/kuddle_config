@@ -45,7 +45,7 @@ defmodule Kuddle.Config.Provider do
 
   @impl true
   def load(config, state) do
-    case resolve_root_path(state.path) do
+    case resolve_root_path!(state.path) do
       nil ->
         raise Kuddle.ConfigError, message: "unresolved path", reason: {:error, :unresolved_path}
 
