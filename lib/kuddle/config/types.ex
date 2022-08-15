@@ -47,9 +47,9 @@ defmodule Kuddle.Config.Types do
     list: {Kuddle.Config.Types.List, :cast},
   ]
 
-  default_types = Application.get_env(:kuddle_config, :default_types, @default_types)
+  default_types = Application.compile_env(:kuddle_config, :default_types, @default_types)
 
-  user_types = Application.get_env(:kuddle_config, :types, [])
+  user_types = Application.compile_env(:kuddle_config, :types, [])
 
   all_types = Keyword.merge(default_types, user_types)
 
