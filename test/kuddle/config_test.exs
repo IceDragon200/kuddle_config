@@ -35,8 +35,8 @@ defmodule Kuddle.ConfigTest do
           decimal_i (decimal)10
           decimal_f (decimal)10.123
           atom (atom)"eggs"
-          boolean_t (boolean)true
-          boolean_f (boolean)false
+          boolean_t (boolean)#true
+          boolean_f (boolean)#false
           boolean_1 (boolean)1
           boolean_0 (boolean)0
           boolean_y (boolean)"YES"

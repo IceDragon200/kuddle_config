@@ -5,9 +5,6 @@ defmodule Kuddle.Config.Types.Decimal do
 
   def cast(value) when is_binary(value) do
     case Decimal.parse(value) do
-      {:ok, %Decimal{} = value} ->
-        {:ok, value}
-
       {%Decimal{} = value, ""} ->
         {:ok, value}
 

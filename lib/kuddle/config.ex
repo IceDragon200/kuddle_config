@@ -138,8 +138,8 @@ defmodule Kuddle.Config do
               {:ok, value} ->
                 {:ok, {mod_to_atom(name), value}}
 
-              {:error, _} = err ->
-                err
+              :error ->
+                {:error, {:bad_cast, type: type}}
             end
 
           [] ->
