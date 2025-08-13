@@ -25,7 +25,7 @@ defmodule Kuddle.Config.MixProject do
   defp deps do
     [
       {:decimal, "~> 2.0"},
-      {:kuddle, "~> 1.0.0"},
+      {:kuddle, "~> 1.0"},
       {:ex_doc, "~> 0.16", only: :dev},
     ]
   end
