@@ -6,7 +6,7 @@ defmodule Kuddle.Config.MixProject do
       name: "Kuddle Config",
       app: :kuddle_config,
       description: description(),
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.10",
       package: package(),
       start_permanent: Mix.env() == :prod,
@@ -24,8 +24,8 @@ defmodule Kuddle.Config.MixProject do
 
   defp deps do
     [
-      {:decimal, "~> 2.0"},
-      {:kuddle, "~> 1.0"},
+      {:decimal, "~> 2.0 or ~> 3.0"},
+      {:kuddle, "~> 1.1"},
       {:ex_doc, "~> 0.16", only: :dev},
     ]
   end
